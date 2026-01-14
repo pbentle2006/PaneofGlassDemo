@@ -126,11 +126,11 @@ export function ChatInterface({ personaId, scenarioId, onProcessingChange }: Cha
     return (
       <div className="flex-1 flex items-center justify-center bg-gray-50">
         <div className="text-center max-w-md px-4">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-gradient-to-br from-[#DA1710] to-[#990000] rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Sparkles className="w-8 h-8 text-white" />
           </div>
           <h2 className="text-xl font-semibold text-gray-900 mb-2">
-            Welcome to Pane of Glass
+            Welcome to Westpac
           </h2>
           <p className="text-gray-600 mb-6">
             Select a persona from the sidebar to begin. Each persona has specialized
@@ -140,22 +140,22 @@ export function ChatInterface({ personaId, scenarioId, onProcessingChange }: Cha
             <QuickStartCard
               title="Customer"
               description="Banking & transactions"
-              color="blue"
+              color="crimson"
             />
             <QuickStartCard
               title="CFO"
               description="Financial insights"
-              color="emerald"
+              color="navy"
             />
             <QuickStartCard
               title="Branch Manager"
               description="Operations & sales"
-              color="amber"
+              color="purple"
             />
             <QuickStartCard
               title="Fraud Analyst"
               description="Investigation & risk"
-              color="violet"
+              color="dark"
             />
           </div>
         </div>
@@ -352,15 +352,16 @@ function ChatMessage({ message, persona }: ChatMessageProps) {
 interface QuickStartCardProps {
   title: string;
   description: string;
-  color: 'blue' | 'emerald' | 'amber' | 'violet';
+  color: 'crimson' | 'navy' | 'purple' | 'dark';
 }
 
 function QuickStartCard({ title, description, color }: QuickStartCardProps) {
+  // Westpac brand color styles
   const colors = {
-    blue: 'bg-blue-50 border-blue-100 text-blue-700',
-    emerald: 'bg-emerald-50 border-emerald-100 text-emerald-700',
-    amber: 'bg-amber-50 border-amber-100 text-amber-700',
-    violet: 'bg-violet-50 border-violet-100 text-violet-700',
+    crimson: 'bg-red-50 border-red-200 text-[#DA1710]',       // Customer - Westpac Crimson
+    navy: 'bg-indigo-50 border-indigo-200 text-[#1F1C4F]',    // CFO - Port Gore
+    purple: 'bg-purple-50 border-purple-200 text-[#991AD6]',  // Branch Manager - Bright Purple
+    dark: 'bg-gray-100 border-gray-300 text-[#2A2E42]',       // Fraud Analyst - Neutral
   };
 
   return (

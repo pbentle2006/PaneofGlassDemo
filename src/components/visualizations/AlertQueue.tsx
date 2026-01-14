@@ -21,38 +21,39 @@ interface AlertQueueProps {
   onAlertClick?: (alert: Alert) => void;
 }
 
+// Westpac Brand Priority Colors
 const priorityConfig = {
   critical: {
     icon: AlertTriangle,
     bg: 'bg-red-50',
     border: 'border-red-200',
-    text: 'text-red-700',
-    badge: 'bg-red-100 text-red-800',
-    iconColor: 'text-red-500',
+    text: 'text-[#DA1710]',           // Westpac Crimson
+    badge: 'bg-red-100 text-[#DA1710]',
+    iconColor: 'text-[#DA1710]',
   },
   high: {
     icon: AlertCircle,
-    bg: 'bg-amber-50',
-    border: 'border-amber-200',
-    text: 'text-amber-700',
-    badge: 'bg-amber-100 text-amber-800',
-    iconColor: 'text-amber-500',
+    bg: 'bg-purple-50',
+    border: 'border-purple-200',
+    text: 'text-[#991AD6]',           // Westpac Bright Purple
+    badge: 'bg-purple-100 text-[#991AD6]',
+    iconColor: 'text-[#991AD6]',
   },
   medium: {
     icon: Info,
-    bg: 'bg-blue-50',
-    border: 'border-blue-200',
-    text: 'text-blue-700',
-    badge: 'bg-blue-100 text-blue-800',
-    iconColor: 'text-blue-500',
+    bg: 'bg-indigo-50',
+    border: 'border-indigo-200',
+    text: 'text-[#1F1C4F]',           // Westpac Port Gore
+    badge: 'bg-indigo-100 text-[#1F1C4F]',
+    iconColor: 'text-[#1F1C4F]',
   },
   low: {
     icon: Info,
     bg: 'bg-gray-50',
     border: 'border-gray-200',
-    text: 'text-gray-700',
-    badge: 'bg-gray-100 text-gray-800',
-    iconColor: 'text-gray-500',
+    text: 'text-[#2A2E42]',           // Westpac Neutral
+    badge: 'bg-gray-100 text-[#2A2E42]',
+    iconColor: 'text-[#595767]',
   },
 };
 
@@ -80,20 +81,20 @@ export function AlertQueue({
           <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
           <span className="text-xs text-gray-500">{alerts.length} total</span>
         </div>
-        {/* Priority summary */}
+        {/* Priority summary - Westpac colors */}
         <div className="flex gap-2 mt-2">
           {priorityCounts.critical > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-800">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-[#DA1710]">
               {priorityCounts.critical} Critical
             </span>
           )}
           {priorityCounts.high > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-[#991AD6]">
               {priorityCounts.high} High
             </span>
           )}
           {priorityCounts.medium > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-[#1F1C4F]">
               {priorityCounts.medium} Medium
             </span>
           )}
@@ -153,7 +154,7 @@ export function AlertQueue({
       {/* Footer */}
       {remainingCount > 0 && (
         <div className="px-4 py-2 bg-gray-50 border-t border-gray-200">
-          <button className="text-xs text-blue-600 hover:text-blue-800 font-medium">
+          <button className="text-xs text-[#DA1710] hover:text-[#990000] font-medium">
             View {remainingCount} more alerts →
           </button>
         </div>

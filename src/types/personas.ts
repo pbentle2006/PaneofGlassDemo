@@ -61,7 +61,7 @@ export type AgentType =
   | 'fraud-detection'
   | 'orchestrator';
 
-// Persona definitions
+// Persona definitions - Westpac Brand Colors
 export const PERSONAS: Record<PersonaId, Persona> = {
   'customer': {
     id: 'customer',
@@ -70,10 +70,10 @@ export const PERSONAS: Record<PersonaId, Persona> = {
     description: 'Everyday banking needs - checking accounts, loans, and support',
     avatar: '/avatars/customer.png',
     theme: {
-      primary: '#2563eb',
-      secondary: '#3b82f6',
-      accent: '#60a5fa',
-      bgGradient: 'from-blue-500 to-blue-700',
+      primary: '#DA1710',      // Westpac Crimson
+      secondary: '#E54545',    // Lighter Crimson
+      accent: '#F08080',       // Light Coral
+      bgGradient: 'from-[#DA1710] to-[#990000]',
       icon: 'User'
     },
     scenarios: ['check-balance', 'dispute-charge', 'apply-loan', 'transfer-money']
@@ -85,10 +85,10 @@ export const PERSONAS: Record<PersonaId, Persona> = {
     description: 'Strategic financial oversight and executive decision-making',
     avatar: '/avatars/cfo.png',
     theme: {
-      primary: '#059669',
-      secondary: '#10b981',
-      accent: '#34d399',
-      bgGradient: 'from-emerald-500 to-emerald-700',
+      primary: '#1F1C4F',      // Westpac Port Gore (Hero)
+      secondary: '#3D3A7A',    // Lighter Port Gore
+      accent: '#5C58A6',       // Light Purple
+      bgGradient: 'from-[#1F1C4F] to-[#0D0B26]',
       icon: 'TrendingUp'
     },
     scenarios: ['financial-overview', 'risk-analysis', 'budget-forecast', 'compliance-report']
@@ -100,10 +100,10 @@ export const PERSONAS: Record<PersonaId, Persona> = {
     description: 'Daily operations, staff management, and customer experience',
     avatar: '/avatars/branch-manager.png',
     theme: {
-      primary: '#d97706',
-      secondary: '#f59e0b',
-      accent: '#fbbf24',
-      bgGradient: 'from-amber-500 to-amber-700',
+      primary: '#991AD6',      // Westpac Bright Purple
+      secondary: '#B347E6',    // Lighter Purple
+      accent: '#CC7AF0',       // Light Purple
+      bgGradient: 'from-[#991AD6] to-[#6B0F96]',
       icon: 'Building2'
     },
     scenarios: ['daily-operations', 'staff-performance', 'customer-satisfaction', 'branch-metrics']
@@ -115,10 +115,10 @@ export const PERSONAS: Record<PersonaId, Persona> = {
     description: 'Fraud detection, investigation, and risk assessment',
     avatar: '/avatars/fraud-analyst.png',
     theme: {
-      primary: '#7c3aed',
-      secondary: '#8b5cf6',
-      accent: '#a78bfa',
-      bgGradient: 'from-violet-500 to-violet-700',
+      primary: '#2A2E42',      // Westpac Neutral Dark
+      secondary: '#45495F',    // Lighter Neutral
+      accent: '#6B7085',       // Muted
+      bgGradient: 'from-[#2A2E42] to-[#181B25]',
       icon: 'Shield'
     },
     scenarios: ['suspicious-activity', 'fraud-patterns', 'case-investigation', 'risk-scoring']

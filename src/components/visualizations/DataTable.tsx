@@ -112,7 +112,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   key={idx}
                   className={`
                     ${striped && idx % 2 === 1 ? 'bg-gray-50/50' : 'bg-white'}
-                    ${isHighlighted ? 'bg-amber-50 border-l-2 border-l-amber-400' : ''}
+                    ${isHighlighted ? 'bg-red-50 border-l-2 border-l-[#DA1710]' : ''}
                     hover:bg-gray-50 transition-colors
                   `}
                 >
@@ -175,10 +175,11 @@ export interface CompetitorData {
   marketShare: number;
 }
 
+// Westpac competitor comparison data
 export const COMPETITOR_TABLE_DATA: CompetitorData[] = [
-  { bank: 'Our Bank', cti: 52.3, roe: 11.8, nim: 1.92, marketShare: 14.2 },
+  { bank: 'Westpac', cti: 52.3, roe: 11.8, nim: 1.92, marketShare: 18.1 },
   { bank: 'CBA', cti: 47.2, roe: 14.1, nim: 2.05, marketShare: 25.8 },
   { bank: 'NAB', cti: 51.8, roe: 11.2, nim: 1.78, marketShare: 18.4 },
   { bank: 'ANZ', cti: 53.1, roe: 10.8, nim: 1.68, marketShare: 17.2 },
-  { bank: 'Westpac', cti: 54.7, roe: 9.5, nim: 1.85, marketShare: 18.1 },
+  { bank: 'Macquarie', cti: 48.5, roe: 12.8, nim: 1.95, marketShare: 8.2 },
 ];

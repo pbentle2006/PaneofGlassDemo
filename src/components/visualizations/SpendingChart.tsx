@@ -114,13 +114,13 @@ export function SpendingChart({
   );
 }
 
-// Pre-configured spending data for demo
+// Pre-configured spending data for demo - Westpac Brand Colors
 export const DEMO_SPENDING_DATA: SpendingCategory[] = [
-  { name: 'Housing', value: 2800, color: '#3b82f6' },
-  { name: 'Food & Dining', value: 1200, color: '#10b981' },
-  { name: 'Transportation', value: 650, color: '#f59e0b' },
-  { name: 'Utilities', value: 380, color: '#8b5cf6' },
-  { name: 'Entertainment', value: 420, color: '#ec4899' },
-  { name: 'Shopping', value: 580, color: '#06b6d4' },
-  { name: 'Other', value: 470, color: '#6b7280' },
+  { name: 'Housing', value: 2800, color: '#DA1710' },      // Westpac Crimson
+  { name: 'Food & Dining', value: 1200, color: '#1F1C4F' }, // Port Gore
+  { name: 'Transportation', value: 650, color: '#991AD6' }, // Bright Purple
+  { name: 'Utilities', value: 380, color: '#2A2E42' },      // Neutral Dark
+  { name: 'Entertainment', value: 420, color: '#FF3DDB' },  // Bright Pink
+  { name: 'Shopping', value: 580, color: '#E0BAF2' },       // Light Purple
+  { name: 'Other', value: 470, color: '#595767' },          // Muted
 ];

@@ -1,8 +1,8 @@
 /**
- * Pane of Glass - Unified Banking Interface
+ * Westpac - Unified Banking Interface
  *
  * Main application component that orchestrates the persona-based
- * agent interaction system.
+ * agent interaction system with Westpac brand theming.
  */
 
 import { useState, useCallback } from 'react';

@@ -17,21 +17,22 @@ interface MetricCardProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
+// Westpac Brand Color Styles
 const colorStyles = {
-  blue: 'bg-blue-50 border-blue-200 text-blue-700',
-  green: 'bg-green-50 border-green-200 text-green-700',
-  amber: 'bg-amber-50 border-amber-200 text-amber-700',
-  violet: 'bg-violet-50 border-violet-200 text-violet-700',
-  red: 'bg-red-50 border-red-200 text-red-700',
+  blue: 'bg-indigo-50 border-indigo-200 text-[#1F1C4F]',      // Port Gore
+  green: 'bg-green-50 border-green-200 text-green-700',        // Keep for success
+  amber: 'bg-purple-50 border-purple-200 text-[#991AD6]',      // Bright Purple
+  violet: 'bg-gray-100 border-gray-300 text-[#2A2E42]',        // Neutral Dark
+  red: 'bg-red-50 border-red-200 text-[#DA1710]',              // Westpac Crimson
   gray: 'bg-gray-50 border-gray-200 text-gray-700',
 };
 
 const iconColors = {
-  blue: 'bg-blue-100 text-blue-600',
-  green: 'bg-green-100 text-green-600',
-  amber: 'bg-amber-100 text-amber-600',
-  violet: 'bg-violet-100 text-violet-600',
-  red: 'bg-red-100 text-red-600',
+  blue: 'bg-indigo-100 text-[#1F1C4F]',       // Port Gore
+  green: 'bg-green-100 text-green-600',        // Keep for success
+  amber: 'bg-purple-100 text-[#991AD6]',       // Bright Purple
+  violet: 'bg-gray-200 text-[#2A2E42]',        // Neutral Dark
+  red: 'bg-red-100 text-[#DA1710]',            // Westpac Crimson
   gray: 'bg-gray-100 text-gray-600',
 };
 

@@ -40,7 +40,7 @@ export function PerformanceChart({
   data,
   title,
   type = 'line',
-  color = '#3b82f6',
+  color = '#DA1710',  // Westpac Crimson as default
   showTarget = false,
   showComparison = false,
   height = 250,

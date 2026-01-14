@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
-/* Custom CSS Variables for Persona Theming */
+/* Custom CSS Variables for Westpac Brand Theming */
 :root {
-  /* Customer Theme - Trust Blue */
-  --customer-primary: #2563eb;
-  --customer-secondary: #3b82f6;
-  --customer-accent: #60a5fa;
+  /* Westpac Core Brand Colors */
+  --westpac-crimson: #DA1710;
+  --westpac-port-gore: #1F1C4F;
+  --westpac-bright-purple: #991AD6;
+  --westpac-neutral: #2A2E42;
+  --westpac-background: #F3F4F6;
+  --westpac-light: #F9F9FB;
+  --westpac-border: #DEDEE1;
+  --westpac-text: #181B25;
+  --westpac-muted: #595767;
 
-  /* CFO Theme - Executive Green */
-  --cfo-primary: #059669;
-  --cfo-secondary: #10b981;
-  --cfo-accent: #34d399;
+  /* Customer Theme - Westpac Crimson */
+  --customer-primary: #DA1710;
+  --customer-secondary: #E54545;
+  --customer-accent: #F08080;
 
-  /* Branch Manager Theme - Operations Amber */
-  --branch-primary: #d97706;
-  --branch-secondary: #f59e0b;
-  --branch-accent: #fbbf24;
+  /* CFO Theme - Port Gore (Executive Navy) */
+  --cfo-primary: #1F1C4F;
+  --cfo-secondary: #3D3A7A;
+  --cfo-accent: #5C58A6;
 
-  /* Fraud Analyst Theme - Security Purple */
-  --fraud-primary: #7c3aed;
-  --fraud-secondary: #8b5cf6;
-  --fraud-accent: #a78bfa;
+  /* Branch Manager Theme - Bright Purple */
+  --branch-primary: #991AD6;
+  --branch-secondary: #B347E6;
+  --branch-accent: #CC7AF0;
+
+  /* Fraud Analyst Theme - Neutral Dark */
+  --fraud-primary: #2A2E42;
+  --fraud-secondary: #45495F;
+  --fraud-accent: #6B7085;
 }
 
 /* Base styles */

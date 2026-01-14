@@ -28,14 +28,14 @@ export function Header({ currentPersona, onMenuClick }: HeaderProps) {
         <div className="flex items-center gap-3">
           <div
             className={`w-10 h-10 rounded-lg bg-gradient-to-br ${
-              persona?.theme.bgGradient || 'from-gray-500 to-gray-700'
+              persona?.theme.bgGradient || 'from-[#DA1710] to-[#990000]'
             } flex items-center justify-center`}
           >
-            <span className="text-white font-bold text-lg">P</span>
+            <span className="text-white font-bold text-lg">W</span>
           </div>
           <div>
             <h1 className="text-lg font-semibold text-gray-900">
-              Pane of Glass
+              Westpac
             </h1>
             <p className="text-xs text-gray-500">
               Unified Banking Interface

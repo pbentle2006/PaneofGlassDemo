@@ -15,11 +15,12 @@ interface KPIGaugeProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
+// Westpac Brand Color Map
 const colorMap = {
-  blue: { fill: '#3b82f6', bg: '#dbeafe' },
-  green: { fill: '#10b981', bg: '#d1fae5' },
-  amber: { fill: '#f59e0b', bg: '#fef3c7' },
-  red: { fill: '#ef4444', bg: '#fee2e2' },
+  blue: { fill: '#1F1C4F', bg: '#E8E8ED' },     // Port Gore with light bg
+  green: { fill: '#10b981', bg: '#d1fae5' },    // Keep green for success indicators
+  amber: { fill: '#991AD6', bg: '#F3E8FF' },    // Bright Purple with light purple bg
+  red: { fill: '#DA1710', bg: '#FEE2E2' },      // Westpac Crimson
 };
 
 export function KPIGauge({

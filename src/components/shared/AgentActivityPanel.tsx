@@ -33,6 +33,7 @@ interface AgentActivityPanelProps {
   className?: string;
 }
 
+// Westpac Brand Colors for Agent Types
 const AGENT_INFO: Record<AgentType, { name: string; icon: typeof Bot; color: string; dataSources: string[] }> = {
   'orchestrator': {
     name: 'Orchestrator',
@@ -43,25 +44,25 @@ const AGENT_INFO: Record<AgentType, { name: string; icon: typeof Bot; color: str
   'customer-service': {
     name: 'Customer Service',
     icon: Users,
-    color: 'text-blue-600',
+    color: 'text-[#DA1710]',  // Westpac Crimson
     dataSources: ['Core Banking', 'CRM', 'Transaction History', 'Product Catalog'],
   },
   'financial-advisor': {
     name: 'Financial Intelligence',
     icon: TrendingUp,
-    color: 'text-emerald-600',
+    color: 'text-[#1F1C4F]',  // Westpac Port Gore
     dataSources: ['Data Warehouse', 'Risk System', 'Market Data', 'Regulatory DB'],
   },
   'operations': {
     name: 'Operations',
     icon: CreditCard,
-    color: 'text-amber-600',
+    color: 'text-[#991AD6]',  // Westpac Bright Purple
     dataSources: ['Branch Systems', 'CRM', 'Sales Pipeline', 'Staff Schedule'],
   },
   'fraud-detection': {
     name: 'Fraud Detection',
     icon: Shield,
-    color: 'text-violet-600',
+    color: 'text-[#2A2E42]',  // Westpac Neutral
     dataSources: ['Fraud Engine', 'Transaction Monitor', 'Threat Intel', 'Case System'],
   },
 };
