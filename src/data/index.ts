@@ -15,3 +15,6 @@ export * from './branch';
 
 // Fraud Analyst Data (Investigation)
 export * from './fraud';
+
+// Master Data Management (Data Governance)
+export * from './masterdata';

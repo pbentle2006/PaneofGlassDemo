@@ -48,6 +48,18 @@ import {
   getAlertsByPriority,
 } from '../data/fraud';
 
+import {
+  MDM_DASHBOARD,
+  DATA_SOURCES,
+  DATA_QUALITY_METRICS,
+  DUPLICATE_CLUSTERS,
+  ENTITY_MATCHES,
+  DATA_LINEAGE,
+  DATA_QUALITY_ISSUES,
+  getIssuesBySeverity,
+  getDuplicatesByPriority,
+} from '../data/masterdata';
+
 /**
  * Mapping of personas to their primary agent type
  */
@@ -56,6 +68,7 @@ const PERSONA_AGENT_MAP: Record<PersonaId, AgentType> = {
   'cfo': 'financial-advisor',
   'branch-manager': 'operations',
   'fraud-analyst': 'fraud-detection',
+  'data-steward': 'data-steward',
 };
 
 /**
@@ -82,6 +95,11 @@ const SCENARIO_AGENT_MAP: Record<ScenarioId, AgentType> = {
   'fraud-patterns': 'fraud-detection',
   'case-investigation': 'fraud-detection',
   'risk-scoring': 'fraud-detection',
+  // Data Steward scenarios
+  'data-quality': 'data-steward',
+  'golden-records': 'data-steward',
+  'entity-resolution': 'data-steward',
+  'data-lineage': 'data-steward',
 };
 
 class AgentRouter {
@@ -211,6 +229,24 @@ class AgentRouter {
       };
     }
 
+    // Data Steward keywords
+    if (
+      lowerMessage.includes('data quality') ||
+      lowerMessage.includes('duplicate') ||
+      lowerMessage.includes('golden record') ||
+      lowerMessage.includes('lineage') ||
+      lowerMessage.includes('master data') ||
+      lowerMessage.includes('entity') ||
+      lowerMessage.includes('mdm')
+    ) {
+      return {
+        targetAgent: 'data-steward',
+        confidence: 0.85,
+        reasoning: 'Data governance keywords detected',
+        context: { keywords: ['data quality', 'duplicate', 'master data'] },
+      };
+    }
+
     // Default to customer service
     return {
       targetAgent: 'customer-service',
@@ -243,6 +279,9 @@ class AgentRouter {
         break;
       case 'fraud-detection':
         response = this.generateFraudAnalystResponse(lowerMessage);
+        break;
+      case 'data-steward':
+        response = this.generateDataStewardResponse(lowerMessage);
         break;
       default:
         response = 'I\'m processing your request...';
@@ -611,6 +650,130 @@ class AgentRouter {
   }
 
   /**
+   * Generate Data Steward responses using mock data
+   */
+  private generateDataStewardResponse(message: string): string {
+    const issues = getIssuesBySeverity();
+    const duplicates = getDuplicatesByPriority();
+
+    // Data quality dashboard / overview
+    if (message.includes('quality') || message.includes('dashboard') || message.includes('overview') || message.includes('metric')) {
+      return `**Data Quality Dashboard**\n\n` +
+        `**Overall Score: ${MDM_DASHBOARD.dataQualityScore}%**\n\n` +
+        `| Dimension | Score | Target | Status |\n` +
+        `|-----------|-------|--------|--------|\n` +
+        DATA_QUALITY_METRICS.map(m =>
+          `| ${m.name} | ${m.score}% | ${m.target}% | ${m.score >= m.target ? '✅' : '⚠️'} ${m.trend === 'up' ? '↑' : m.trend === 'down' ? '↓' : '→'} |`
+        ).join('\n') +
+        `\n\n**Records Summary:**\n` +
+        `- Total Records: ${MDM_DASHBOARD.totalRecords.toLocaleString()}\n` +
+        `- Golden Records: ${MDM_DASHBOARD.goldenRecords.toLocaleString()}\n` +
+        `- Systems Connected: ${MDM_DASHBOARD.systemsConnected}\n` +
+        `- Processed Today: ${MDM_DASHBOARD.recordsProcessedToday.toLocaleString()}\n\n` +
+        `**Action Required:**\n` +
+        `- ${issues.critical.length} critical issues\n` +
+        `- ${MDM_DASHBOARD.pendingDuplicates} pending duplicates`;
+    }
+
+    // Duplicates / golden records
+    if (message.includes('duplicate') || message.includes('golden') || message.includes('merge')) {
+      const highPriority = duplicates.high;
+
+      return `**Duplicate Management Queue**\n\n` +
+        `**Pending Duplicates: ${MDM_DASHBOARD.pendingDuplicates}**\n` +
+        `- High Priority: ${highPriority.length}\n` +
+        `- Medium Priority: ${duplicates.medium.length}\n` +
+        `- Low Priority: ${duplicates.low.length}\n\n` +
+        `**Top Duplicate Clusters:**\n\n` +
+        DUPLICATE_CLUSTERS.slice(0, 3).map(d =>
+          `**Cluster ${d.clusterId}** (${d.priority} priority)\n` +
+          `- Records: ${d.recordCount} | Match Score: ${d.matchScore}%\n` +
+          `- Suggested Action: ${d.suggestedAction === 'auto-merge' ? '🤖 Auto-Merge' : '👤 Manual Review'}\n` +
+          `- Names: ${d.records.map(r => r.customerName).join(' | ')}`
+        ).join('\n\n') +
+        `\n\n**Quick Actions:**\n` +
+        `- Auto-merge ${DUPLICATE_CLUSTERS.filter(d => d.suggestedAction === 'auto-merge').length} clusters\n` +
+        `- Review ${DUPLICATE_CLUSTERS.filter(d => d.suggestedAction === 'manual-review').length} clusters manually`;
+    }
+
+    // Entity resolution
+    if (message.includes('entity') || message.includes('match') || message.includes('resolution')) {
+      return `**Entity Resolution Queue**\n\n` +
+        `**Pending Matches: ${ENTITY_MATCHES.filter(m => m.status === 'pending').length}**\n\n` +
+        `| Match ID | Entity 1 | Entity 2 | Score | Type |\n` +
+        `|----------|----------|----------|-------|------|\n` +
+        ENTITY_MATCHES.map(m =>
+          `| ${m.id} | ${m.entity1.name} | ${m.entity2.name} | ${m.matchScore}% | ${m.matchType} |`
+        ).join('\n') +
+        `\n\n**Match Details:**\n\n` +
+        ENTITY_MATCHES.slice(0, 2).map(m =>
+          `**${m.id}**\n` +
+          `- Matched Fields: ${m.matchedFields.join(', ')}\n` +
+          `- Entity 1 IDs: ${Object.entries(m.entity1.identifiers).map(([k, v]) => `${k}: ${v}`).join(', ')}\n` +
+          `- Entity 2 IDs: ${Object.entries(m.entity2.identifiers).map(([k, v]) => `${k}: ${v}`).join(', ')}`
+        ).join('\n\n') +
+        `\n\n**Recommendation:** Review ${ENTITY_MATCHES[0].id} first - highest confidence match.`;
+    }
+
+    // Data lineage
+    if (message.includes('lineage') || message.includes('source') || message.includes('flow') || message.includes('origin')) {
+      const sources = DATA_LINEAGE.filter(n => n.type === 'source');
+      const destinations = DATA_LINEAGE.filter(n => n.type === 'destination');
+      const hub = DATA_LINEAGE.find(n => n.type === 'transformation');
+
+      return `**Customer Data Lineage**\n\n` +
+        `**Data Flow Architecture:**\n\n` +
+        `\`\`\`\n` +
+        `${sources.map(s => s.name).join(' ─┐\n')} ─┐\n` +
+        `                    ├─→ [MDM Hub] ─┬─→ ${destinations.map(d => d.name).join('\n                               ├─→ ')}\n` +
+        `\`\`\`\n\n` +
+        `**Source Systems:**\n` +
+        DATA_SOURCES.map(s =>
+          `- **${s.name}** (${s.system}): ${s.recordCount.toLocaleString()} records | Quality: ${s.quality}%`
+        ).join('\n') +
+        `\n\n**MDM Hub Transformations:**\n` +
+        hub?.transformations?.map(t => `- ${t}`).join('\n') +
+        `\n\n**Destination Systems:**\n` +
+        destinations.map(d => `- ${d.name} (${d.system}) - Owner: ${d.dataOwner}`).join('\n');
+    }
+
+    // Data quality issues
+    if (message.includes('issue') || message.includes('error') || message.includes('problem')) {
+      return `**Data Quality Issues Queue**\n\n` +
+        `**Open Issues: ${MDM_DASHBOARD.issuesInQueue}**\n` +
+        `- Critical: ${issues.critical.length}\n` +
+        `- High: ${issues.high.length}\n` +
+        `- Medium: ${issues.medium.length}\n\n` +
+        `**Top Issues:**\n\n` +
+        DATA_QUALITY_ISSUES.slice(0, 4).map(i =>
+          `**${i.id}** - ${i.severity.toUpperCase()}\n` +
+          `- Type: ${i.type} | Field: ${i.field}\n` +
+          `- Records Affected: ${i.recordCount.toLocaleString()}\n` +
+          `- ${i.description}\n` +
+          `- Fix: ${i.suggestedFix}\n` +
+          `- Status: ${i.status}`
+        ).join('\n\n') +
+        `\n\n**Quick Actions:**\n` +
+        `1. Apply phone number standardization (fixes 12,456 records)\n` +
+        `2. Run email enrichment batch job\n` +
+        `3. Schedule KYC refresh workflow`;
+    }
+
+    // Default data steward response
+    return `**Master Data Hub - Welcome, James**\n\n` +
+      `**Data Quality Overview:**\n` +
+      `- Customer Records: ${MDM_DASHBOARD.totalRecords.toLocaleString()} total\n` +
+      `- Golden Records: ${MDM_DASHBOARD.goldenRecords.toLocaleString()}\n` +
+      `- Match Rate: ${MDM_DASHBOARD.dataQualityScore}%\n` +
+      `- Pending Duplicates: ${MDM_DASHBOARD.pendingDuplicates}\n` +
+      `- Issues in Queue: ${MDM_DASHBOARD.issuesInQueue}\n\n` +
+      `**Connected Systems:** ${MDM_DASHBOARD.systemsConnected}\n` +
+      `**Last Sync:** ${new Date(MDM_DASHBOARD.lastSyncTime).toLocaleTimeString()}\n\n` +
+      `I can help you manage golden records, resolve duplicates, track data lineage, and monitor data quality metrics.\n\n` +
+      `What would you like to focus on?`;
+  }
+
+  /**
    * Get suggested follow-up actions based on agent type
    */
   private getSuggestedActions(agentType: AgentType) {
@@ -635,6 +798,11 @@ class AgentRouter {
         { id: '1', label: 'Critical Alerts', action: 'alerts', icon: 'Bell' },
         { id: '2', label: 'Active Cases', action: 'cases', icon: 'FileSearch' },
         { id: '3', label: 'Threat Intel', action: 'threats', icon: 'Shield' },
+      ],
+      'data-steward': [
+        { id: '1', label: 'Data Quality', action: 'quality', icon: 'CheckCircle' },
+        { id: '2', label: 'Duplicates', action: 'duplicates', icon: 'Copy' },
+        { id: '3', label: 'Data Lineage', action: 'lineage', icon: 'GitBranch' },
       ],
     };
 

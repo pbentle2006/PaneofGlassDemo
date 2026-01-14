@@ -157,6 +157,11 @@ export function ChatInterface({ personaId, scenarioId, onProcessingChange }: Cha
               description="Investigation & risk"
               color="dark"
             />
+            <QuickStartCard
+              title="Data Steward"
+              description="Data quality & governance"
+              color="darkred"
+            />
           </div>
         </div>
       </div>
@@ -352,7 +357,7 @@ function ChatMessage({ message, persona }: ChatMessageProps) {
 interface QuickStartCardProps {
   title: string;
   description: string;
-  color: 'crimson' | 'navy' | 'purple' | 'dark';
+  color: 'crimson' | 'navy' | 'purple' | 'dark' | 'darkred';
 }
 
 function QuickStartCard({ title, description, color }: QuickStartCardProps) {
@@ -362,6 +367,7 @@ function QuickStartCard({ title, description, color }: QuickStartCardProps) {
     navy: 'bg-indigo-50 border-indigo-200 text-[#1F1C4F]',    // CFO - Port Gore
     purple: 'bg-purple-50 border-purple-200 text-[#991AD6]',  // Branch Manager - Bright Purple
     dark: 'bg-gray-100 border-gray-300 text-[#2A2E42]',       // Fraud Analyst - Neutral
+    darkred: 'bg-rose-50 border-rose-200 text-[#990000]',     // Data Steward - Dark Red
   };
 
   return (
@@ -378,6 +384,7 @@ function getWelcomeMessage(personaId: PersonaId, _scenarioId: ScenarioId | null)
     'cfo': `Good morning. I'm your Financial Intelligence Agent, ready to provide executive-level insights.\n\n**Available Analysis:**\n- Financial performance & KPIs\n- Risk assessment & compliance\n- Budget forecasting & variance\n- Competitor benchmarking\n\nHow may I assist you today?`,
     'branch-manager': `Hello! I'm your Operations Assistant for the Chatswood branch.\n\n**I can help with:**\n- Weekly performance metrics\n- Staff management & coaching\n- Sales opportunities & hot leads\n- Investment ROI analysis\n\nWhat would you like to review?`,
     'fraud-analyst': `Welcome to the Fraud Detection Center.\n\n**Today's Overview:**\n- 183 alerts in queue\n- 3 critical priority cases\n- 2 active investigations\n\nI can help you triage alerts, investigate cases, and assess portfolio risk. What would you like to focus on?`,
+    'data-steward': `Welcome to the Master Data Hub, James.\n\n**Data Quality Overview:**\n- Customer Records: 2.4M total\n- Match Rate: 94.2%\n- Pending Duplicates: 847\n- Issues in Queue: 156\n\nI can help you manage golden records, resolve duplicates, track data lineage, and monitor data quality metrics.\n\nWhat would you like to focus on?`,
   };
 
   return messages[personaId];
@@ -389,6 +396,7 @@ function getAgentName(personaId: PersonaId): string {
     'cfo': 'Financial Intelligence Agent',
     'branch-manager': 'Operations Assistant',
     'fraud-analyst': 'Fraud Detection Agent',
+    'data-steward': 'Data Steward Agent',
   };
   return names[personaId];
 }
@@ -399,6 +407,7 @@ function getAgentType(personaId: PersonaId): AgentType {
     'cfo': 'financial-advisor',
     'branch-manager': 'operations',
     'fraud-analyst': 'fraud-detection',
+    'data-steward': 'data-steward',
   };
   return types[personaId];
 }
@@ -428,6 +437,12 @@ function getQuickActions(personaId: PersonaId): string[] {
       "What's the BEC case status?",
       "Which segments are at risk?",
       "What threats should I watch for in Q1?",
+    ],
+    'data-steward': [
+      "Show me data quality metrics",
+      "What duplicates need review?",
+      "Show entity matches pending",
+      "Display customer data lineage",
     ],
   };
   return actions[personaId];

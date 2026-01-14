@@ -1,8 +1,8 @@
 /**
- * Persona Types - Defines the 4 user personas for the Pane of Glass interface
+ * Persona Types - Defines the 5 user personas for the Westpac interface
  */
 
-export type PersonaId = 'customer' | 'cfo' | 'branch-manager' | 'fraud-analyst';
+export type PersonaId = 'customer' | 'cfo' | 'branch-manager' | 'fraud-analyst' | 'data-steward';
 
 export interface Persona {
   id: PersonaId;
@@ -42,7 +42,12 @@ export type ScenarioId =
   | 'suspicious-activity'
   | 'fraud-patterns'
   | 'case-investigation'
-  | 'risk-scoring';
+  | 'risk-scoring'
+  // Data Steward scenarios (4)
+  | 'data-quality'
+  | 'golden-records'
+  | 'entity-resolution'
+  | 'data-lineage';
 
 export interface Scenario {
   id: ScenarioId;
@@ -59,6 +64,7 @@ export type AgentType =
   | 'financial-advisor'
   | 'operations'
   | 'fraud-detection'
+  | 'data-steward'
   | 'orchestrator';
 
 // Persona definitions - Westpac Brand Colors
@@ -122,5 +128,20 @@ export const PERSONAS: Record<PersonaId, Persona> = {
       icon: 'Shield'
     },
     scenarios: ['suspicious-activity', 'fraud-patterns', 'case-investigation', 'risk-scoring']
+  },
+  'data-steward': {
+    id: 'data-steward',
+    name: 'James Wong',
+    title: 'Data Governance Lead',
+    description: 'Data quality, golden records, lineage and governance',
+    avatar: '/avatars/data-steward.png',
+    theme: {
+      primary: '#990000',      // Westpac Dark Red
+      secondary: '#B33333',    // Lighter Dark Red
+      accent: '#CC6666',       // Light Red
+      bgGradient: 'from-[#990000] to-[#660000]',
+      icon: 'Database'
+    },
+    scenarios: ['data-quality', 'golden-records', 'entity-resolution', 'data-lineage']
   }
 };

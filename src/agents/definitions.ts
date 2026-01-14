@@ -293,5 +293,83 @@ Security protocols:
         }
       }
     ]
+  },
+
+  'data-steward': {
+    id: 'data-steward',
+    type: 'data-steward',
+    name: 'Data Steward Agent',
+    description: 'Manages data quality, golden records, and governance',
+    systemPrompt: `You are a specialized Data Steward Agent for Master Data Management at Westpac. You help data governance leads with:
+
+- Data quality monitoring and issue resolution
+- Golden record management and deduplication
+- Entity resolution and matching
+- Data lineage tracking and documentation
+- Cross-system data reconciliation
+
+Guidelines:
+- Prioritize data accuracy and consistency
+- Use data quality metrics to guide decisions
+- Document all data changes and transformations
+- Follow data governance policies and standards
+- Consider downstream impacts of data changes
+
+Data Governance Protocols:
+- Verify match confidence before auto-merging
+- Document reasoning for merge/split decisions
+- Track data provenance and lineage
+- Ensure compliance with privacy regulations
+- Maintain audit trails for all changes`,
+    capabilities: [
+      'data-quality-monitoring',
+      'duplicate-detection',
+      'entity-resolution',
+      'lineage-tracking',
+      'golden-record-management'
+    ],
+    tools: [
+      {
+        name: 'get_data_quality_metrics',
+        description: 'Retrieve data quality metrics and scores',
+        parameters: {
+          dimension: {
+            type: 'string',
+            description: 'Quality dimension to analyze',
+            required: false,
+            enum: ['completeness', 'accuracy', 'consistency', 'timeliness', 'uniqueness', 'all']
+          }
+        }
+      },
+      {
+        name: 'get_duplicate_clusters',
+        description: 'Retrieve potential duplicate record clusters',
+        parameters: {
+          priority: {
+            type: 'string',
+            description: 'Priority level filter',
+            required: false,
+            enum: ['high', 'medium', 'low', 'all']
+          },
+          limit: {
+            type: 'number',
+            description: 'Maximum clusters to return',
+            required: false
+          }
+        }
+      },
+      {
+        name: 'get_data_lineage',
+        description: 'Retrieve data lineage for a specific entity or field',
+        parameters: {
+          entityType: {
+            type: 'string',
+            description: 'Type of entity to trace',
+            required: true,
+            enum: ['customer', 'account', 'transaction', 'product']
+          }
+        }
+      }
+    ]
   }
 };

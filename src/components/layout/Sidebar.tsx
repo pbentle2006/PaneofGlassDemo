@@ -7,6 +7,7 @@ import {
   TrendingUp,
   Building2,
   Shield,
+  Database,
   ChevronRight,
   type LucideIcon,
 } from 'lucide-react';
@@ -18,6 +19,7 @@ const PERSONA_ICONS: Record<PersonaId, LucideIcon> = {
   'cfo': TrendingUp,
   'branch-manager': Building2,
   'fraud-analyst': Shield,
+  'data-steward': Database,
 };
 
 interface SidebarProps {

@@ -32,6 +32,11 @@
   --fraud-primary: #2A2E42;
   --fraud-secondary: #45495F;
   --fraud-accent: #6B7085;
+
+  /* Data Steward Theme - Dark Red */
+  --data-primary: #990000;
+  --data-secondary: #B33333;
+  --data-accent: #CC6666;
 }
 
 /* Base styles */

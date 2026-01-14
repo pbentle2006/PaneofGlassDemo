@@ -65,6 +65,12 @@ const AGENT_INFO: Record<AgentType, { name: string; icon: typeof Bot; color: str
     color: 'text-[#2A2E42]',  // Westpac Neutral
     dataSources: ['Fraud Engine', 'Transaction Monitor', 'Threat Intel', 'Case System'],
   },
+  'data-steward': {
+    name: 'Data Steward',
+    icon: Database,
+    color: 'text-[#990000]',  // Westpac Dark Red
+    dataSources: ['MDM Hub', 'Data Quality Engine', 'Entity Resolution', 'Data Catalog'],
+  },
 };
 
 const PERSONA_PRIMARY_AGENT: Record<PersonaId, AgentType> = {
@@ -72,6 +78,7 @@ const PERSONA_PRIMARY_AGENT: Record<PersonaId, AgentType> = {
   'cfo': 'financial-advisor',
   'branch-manager': 'operations',
   'fraud-analyst': 'fraud-detection',
+  'data-steward': 'data-steward',
 };
 
 export function AgentActivityPanel({
